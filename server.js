@@ -14,7 +14,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //DB Config
-const db = 'mongodb://localhost:27017/devconnector';
+const db = process.env.MONGODB_URI;
 
 //Connect to MongoDB
 mongoose
