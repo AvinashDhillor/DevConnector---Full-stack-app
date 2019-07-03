@@ -9,7 +9,9 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Avinash",
   "license": "ISC",
@@ -22,9 +24,11 @@
     "mongoose": "^5.3.15",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "validator": "^10.9.0"
+    "validator": "^10.9.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.7"
-  }
+  },
+  "snyk": true
 }
