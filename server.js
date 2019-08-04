@@ -1,12 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const passport = require('passport');
-const path = require('path');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const path = require("path");
+const dotenv = require("dotenv").config();
 
-const users = require('./routes/api/users');
-const profile = require('./routes/api/profile');
-const posts = require('./routes/api/posts');
+const users = require("./routes/api/users");
+const profile = require("./routes/api/profile");
+const posts = require("./routes/api/posts");
 
 const app = express();
 
@@ -20,31 +21,31 @@ const db = process.env.MONGODB_URI;
 mongoose
   .connect(db)
   .then(() => {
-    console.log('MongoDB connected');
+    console.log("MongoDB connected");
   })
   .catch(err => {
-    console.log('error', err);
+    console.log("error", err);
   });
 
 //Passport middleware
 app.use(passport.initialize());
 
 //Passport Config
-require('./config/passport.js')(passport);
+require("./config/passport.js")(passport);
 
 //Use Routes
-app.use('/api/users', users);
-app.use('/api/profile', profile);
-app.use('/api/posts', posts);
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
 
 //Server static assets if in production
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   //set static folder
-  app.use(express.static('client/build'));
+  app.use(express.static("client/build"));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
